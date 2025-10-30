@@ -4,7 +4,7 @@ public class Main {
         String url = "jdbc:mysql://127.0.0.1:3306/my_database"  ;
         String username = "root";
         String password = "sg@121";
-        String query = "Select * from employee;";
+        String query = "INSERT INTO employee(id,name,job_title,salary) VALUES (4,'Golu','Full Stack Developer',1500000);";
         try{
          Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Drivers loaded successfully!! ");
@@ -15,19 +15,13 @@ public class Main {
             Connection con = DriverManager.getConnection(url,username,password);
             System.out.println("Connrction Established Successfully !!");
             Statement stmt = con.createStatement();
-            ResultSet rs =  stmt.executeQuery(query);
-            while(rs.next()){
-                int id = rs.getInt("id");
-                String name = rs.getNString("name");
-                String job_title = rs.getNString("job_title");
-                Double salary = rs.getDouble("salary");
-                System.out.println("-----------------------------");
-                System.out.println("ID : "+id);
-                System.out.println("Name : "+name);
-                System.out.println("Job title : "+job_title);
-                System.out.println("Salary : "+salary);
+            int rowsAffected = stmt.executeUpdate(query);
+            if(rowsAffected > 0){
+                System.out.println("Insert successful " + rowsAffected + "row(s) affected");
+            }else{
+                System.out.println("Insertion failed !!");
             }
-            rs.close();
+
             stmt.close();
             con.close();
             System.out.println();
