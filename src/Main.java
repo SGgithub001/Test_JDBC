@@ -4,7 +4,9 @@ public class Main {
         String url = "jdbc:mysql://127.0.0.1:3306/my_database"  ;
         String username = "root";
         String password = "sg@121";
-        String query = "INSERT INTO employee(id,name,job_title,salary) VALUES (4,'Golu','Full Stack Developer',1500000);";
+        String query = "Update employee\n" +
+                "SET job_title = 'Data Analyst',salary = 120000\n" +
+                "Where id = 2";
         try{
          Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Drivers loaded successfully!! ");
@@ -13,13 +15,13 @@ public class Main {
         }
         try{
             Connection con = DriverManager.getConnection(url,username,password);
-            System.out.println("Connrction Established Successfully !!");
+            System.out.println("Connection Established Successfully !!");
             Statement stmt = con.createStatement();
             int rowsAffected = stmt.executeUpdate(query);
             if(rowsAffected > 0){
-                System.out.println("Insert successful " + rowsAffected + "row(s) affected");
+                System.out.println("Updation successful " + rowsAffected + "row(s) affected");
             }else{
-                System.out.println("Insertion failed !!");
+                System.out.println("Updation failed !!");
             }
 
             stmt.close();
